@@ -13,15 +13,23 @@ public class MatrixMultiplication {
             return;
         }
 
-        int N = Integer.parseInt(args[0]);
-        int M = Integer.parseInt(args[1]);
-        int X = Integer.parseInt(args[2]);
-        int Y = Integer.parseInt(args[3]);
+        int N, M, X, Y;
+        int[][] matrixA, matrixB;
 
-        int[][] matrixA = new int[N][M];
-        int[][] matrixB = new int[X][Y];
+        try {
+            N = Integer.parseInt(args[0]);
+            M = Integer.parseInt(args[1]);
+            X = Integer.parseInt(args[2]);
+            Y = Integer.parseInt(args[3]);
+
+            matrixA = new int[N][M];
+            matrixB = new int[X][Y];
+        } catch (NumberFormatException e) {
+            System.out.println("wrong args format");
+            return;
+        }
+
         int pos = 4;
-
         if (args.length != (N*M + X*Y + 4)) {
             System.out.println("not enough arguments");
             return;
@@ -32,18 +40,23 @@ public class MatrixMultiplication {
             return;
         }
 
-        //init matrixA
-        for (int i = 0; i < matrixA.length; i++) {
-            for (int j = 0; j < matrixA[0].length; j++) {
-                matrixA[i][j] = Integer.parseInt(args[pos++]);
+        try {
+            //init matrixA
+            for (int i = 0; i < matrixA.length; i++) {
+                for (int j = 0; j < matrixA[0].length; j++) {
+                    matrixA[i][j] = Integer.parseInt(args[pos++]);
+                }
             }
-        }
 
-        // init matrixB
-        for (int i = 0; i < matrixB.length; i++) {
-            for (int j = 0; j < matrixB[0].length; j++) {
-                matrixB[i][j] = Integer.parseInt(args[pos++]);
+            // init matrixB
+            for (int i = 0; i < matrixB.length; i++) {
+                for (int j = 0; j < matrixB[0].length; j++) {
+                    matrixB[i][j] = Integer.parseInt(args[pos++]);
+                }
             }
+        } catch (NumberFormatException e) {
+            System.out.println("wrong args format");
+            return;
         }
 
         MatrixMultiplication mainClass = new MatrixMultiplication();
@@ -72,7 +85,7 @@ public class MatrixMultiplication {
         StringBuilder build = new StringBuilder();
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[0].length; j++) {
-                build.append(matrix[i][j]);
+                build.append(matrix[i][j] + " ");
             }
             build.append("\n");
         }
